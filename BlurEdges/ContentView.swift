@@ -8,14 +8,30 @@
 import SwiftUI
 
 struct ContentView: View {
+    var colors: [Color] = [.black.opacity(0), .black, .black.opacity(0)]
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        ScrollView(.vertical, showsIndicators: false) {
+            VStack(spacing: 16) {
+                Spacer(minLength: UIScreen.main.bounds.height / 3)
+                
+                ForEach(0...30, id: \.self) { item in
+                    Text("item \(item)")
+                        .foregroundColor(.black)
+                        .frame(maxWidth: .infinity)
+                        .font(.title)
+                }
+                
+                Spacer(minLength: UIScreen.main.bounds.height / 3)
+            }
         }
-        .padding()
+        .mask {
+            LinearGradient(
+                colors: colors,
+                startPoint: .top,
+                endPoint: .bottom
+            )
+        }
     }
 }
 
